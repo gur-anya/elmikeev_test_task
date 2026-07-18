@@ -1,0 +1,7 @@
+{
+    "data": [
+        {"sale_id": "S1", "g_number": "g1", "date": "2026-07-15 10:00:00", "nm_id": 2001, "barcode": "b2001", "total_price": 200.00},
+        {"sale_id": "S2", "g_number": "g2", "date": "2026-07-16 12:00:00", "nm_id": 2002, "barcode": "b2002", "total_price": 300.00}
+    ],
+    "meta": {"total": 2, "last_page": 1}
+}

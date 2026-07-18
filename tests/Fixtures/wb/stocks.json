@@ -1,0 +1,9 @@
+{
+    "data": [
+        {"date": "2026-07-15", "nm_id": 3001, "barcode": "b3001", "warehouse_name": "WH1", "quantity": 10},
+        {"date": "2026-07-15", "nm_id": 3001, "barcode": "b3001", "warehouse_name": "WH2", "quantity": 5},
+        {"date": "2026-07-15", "nm_id": 3002, "barcode": "b3002", "warehouse_name": "WH1", "quantity": 7},
+        {"date": "2026-07-15", "nm_id": 3002, "barcode": "b3002", "warehouse_name": "WH2", "quantity": 2}
+    ],
+    "meta": {"total": 4, "last_page": 1}
+}

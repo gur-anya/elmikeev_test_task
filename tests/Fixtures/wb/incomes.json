@@ -1,0 +1,7 @@
+{
+    "data": [
+        {"income_id": 111, "date": "2026-07-15", "nm_id": 1001, "barcode": "b1001", "warehouse_name": "WH", "quantity": 5, "total_price": 100.50},
+        {"income_id": 222, "date": "2026-07-16", "nm_id": 1002, "barcode": "b1002", "warehouse_name": "WH", "quantity": 3, "total_price": 50.00}
+    ],
+    "meta": {"total": 2, "last_page": 1}
+}
