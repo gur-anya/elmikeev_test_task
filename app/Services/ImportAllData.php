@@ -23,7 +23,7 @@ class ImportAllData
     /**
      * @throws Exception
      */
-    public function execute(string $dateFromString, string $dateToString): void
+    public function execute(string $dateFromString, string $dateToString, ?callable $onProgress = null): void
     {
         $dateFrom = \DateTimeImmutable::createFromFormat('Y-m-d', $dateFromString);
         if ($dateFrom === false) {
@@ -35,10 +35,12 @@ class ImportAllData
         }
 
         foreach (self::PERIOD_ENTITIES as $endpoint => $model) {
-            $this->importer->import($endpoint, $model, $dateFrom, $dateTo);
+            $this->importer->import($endpoint, $model, $dateFrom, $dateTo,
+                $onProgress ? fn (int $page, int $last) => $onProgress($endpoint, $page, $last) : null);
         }
 
         $today = new \DateTimeImmutable('today', new \DateTimeZone(config('services.web_api.timezone')));
-        $this->importer->import('stocks', Stock::class, $today, $today);
+        $this->importer->import('stocks', Stock::class, $today, $today,
+            $onProgress ? fn (int $page, int $last) => $onProgress('stocks', $page, $last) : null);
     }
 }

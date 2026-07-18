@@ -13,7 +13,7 @@ class Importer
     /**
      * @throws \Throwable
      */
-    public function import(string $endpoint, $model, \DateTimeImmutable $dateFrom, \DateTimeImmutable $dateTo): void
+    public function import(string $endpoint, $model, \DateTimeImmutable $dateFrom, \DateTimeImmutable $dateTo, ?callable $onPage = null): void
     {
         // decision for remote db: batch size for local db was 500 (exactly one max page)
         $capWorkaround = ((int) env('DB_RECONNECT_EVERY', 0)) > 0;
@@ -30,8 +30,10 @@ class Importer
         };
 
         $purgedDays = [];
+        $pageNo = 0;
 
         foreach ($this->client->fetch($endpoint, $dateFrom, $dateTo) as $page) {
+            $pageNo++;
             foreach ($page['data'] as $row) {
                 $day = substr((string) $row['date'], 0, 10);
                 if ($day !== '' && ! isset($purgedDays[$day])) {
@@ -44,6 +46,11 @@ class Importer
             foreach (array_chunk($page['data'], $batchSize) as $batch) {
                 $freshConnEvery();
                 $model::insert($batch);
+            }
+
+            // report progress: this page number and the total page count from the API meta
+            if ($onPage) {
+                $onPage($pageNo, (int) ($page['meta']['last_page'] ?? $pageNo));
             }
         }
     }
