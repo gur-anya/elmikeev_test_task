@@ -32,6 +32,8 @@ docker compose up -d
 ```
 docker compose exec app php artisan import:all-data --date-from=[Y-m-d] --date-to=[Y-m-d]
 ```
+<img width="1214" height="277" alt="image" src="https://github.com/user-attachments/assets/7446ec06-f665-475a-9a3d-a61d8630ea40" />
+
 Пример просмотра содержимого таблиц 
 ```
 docker compose exec app php artisan tinker
