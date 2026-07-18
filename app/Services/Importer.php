@@ -17,7 +17,7 @@ class Importer
     {
         // decision for remote db: batch size for local db was 500 (exactly one max page)
         $capWorkaround = ((int) env('DB_RECONNECT_EVERY', 0)) > 0;
-        $batchSize  = $capWorkaround ? max(1, (int) env('DB_INSERT_BATCH', 10)) : 500;
+        $batchSize  = $capWorkaround ? max(1, (int) env('DB_INSERT_BATCH', 200)) : 500;
         $opsPerConn = max(1, (int) env('DB_OPS_PER_CONN', 3));
 
         $op = 0;
